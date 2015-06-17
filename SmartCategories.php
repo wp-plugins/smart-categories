@@ -3,7 +3,7 @@
 Plugin Name: Smart Categories
 Description: Automatically sorts all / new posts into categories based on title content
 Author: Rob Pannell
-Version: 1.0.1
+Version: 1.0.2
 Author URI: http://robpannell.com/
 */
 
@@ -61,7 +61,7 @@ function SmartCatAdminPage() {
             </div>
         
         <?php } ?>
-        <p>This plugin will automatically put posts into categories for you based on the post title containing a key word/phrase. This runs every time a page is loaded, but each time it will only sort posts that have not been seen by the plugin before. You can re-run the process on ALL posts with the button at the bottom of this page, or just the new ones below.</p>
+        <p>This plugin will automatically put posts into categories for you based on the post title containing a key word/phrase. By default, newly created posts are checked every time a page is loaded, however you can switch to switch it to only be fired manually. You can run the process manually using the buttons below.</p>
         <p>Last checked: <strong><?php echo date('G:i dS F Y', get_option('AutoCatLastSorted'));?></strong></p>
         <form method="post" action="<?php echo $pageUrl;?>">
             <p>
@@ -69,8 +69,31 @@ function SmartCatAdminPage() {
                 <button class="button-primary" name="updateAllPosts" type="submit">Process ALL Posts</button>
             </p>    
         </form>
-        <hr />
         
+        <hr />
+                
+        <h3>Auto / Manual Filtering</h3>
+        <form name="FilterRule" method="post" action="<?php echo $pageUrl;?>">
+            <blockquote>
+                <p>
+                <input name="autoSort" type="radio" value="true" onclick="this.form.submit()"
+                       <?php if(get_option('AutoCatActive') == 'true') echo 'checked';?> />
+                <label>Auto <a href="#TB_inline?width=400&height=100&inlineId=autoDef" class="thickbox">(?)</a> </label><br/>
+                <input name="autoSort" type="radio" value="false" onclick="this.form.submit()"
+                       <?php if(get_option('AutoCatActive') == 'false') echo 'checked';?> />
+                <label>Manual <a href="#TB_inline?width=400&height=100&inlineId=manualDef" class="thickbox">(?)</a></label><br/>
+                </p>
+            </blockquote>
+        </form>
+        <div id="autoDef" style="display:none;">
+            <p>Each time a user loads a page on your website, the plugin will check for any new posts that were added and apply your rules against them.</p>
+        </div>
+        <div id="manualDef" style="display:none;">
+            <p>Nothing will happen automatically. You will need to click the 'Process New Posts' button on this admin page to process posts.</p>
+        </div>
+        
+        <hr />
+                
         <h3>Active Rules:</h3>
         <form method="post" action="<?php echo $pageUrl;?>">
             <table class="widefat">
@@ -112,26 +135,6 @@ function SmartCatAdminPage() {
                 </tfoot>
             </table>
         </form>
-        
-        <h3>Auto / Manual Filtering</h3>
-        <form name="FilterRule" method="post" action="<?php echo $pageUrl;?>">
-            <blockquote>
-                <p>
-                <input name="autoSort" type="radio" value="true" onclick="this.form.submit()"
-                       <?php if(get_option('AutoCatActive') == 'true') echo 'checked';?> />
-                <label>Auto <a href="#TB_inline?width=400&height=100&inlineId=autoDef" class="thickbox">(?)</a> </label><br/>
-                <input name="autoSort" type="radio" value="false" onclick="this.form.submit()"
-                       <?php if(get_option('AutoCatActive') == 'false') echo 'checked';?> />
-                <label>Manual <a href="#TB_inline?width=400&height=100&inlineId=manualDef" class="thickbox">(?)</a></label><br/>
-                </p>
-            </blockquote>
-        </form>
-        <div id="autoDef" style="display:none;">
-            <p>Each time a user loads a page on your website, the plugin will check for any new posts that were added and apply your rules against them.</p>
-        </div>
-        <div id="manualDef" style="display:none;">
-            <p>Nothing will happen automatically. You will need to click the 'Process New Posts' button on this admin page to process posts.</p>
-        </div>
         
         <h3>Remove a category from existing posts: <a href="#TB_inline?width=400&height=100&inlineId=stripCat" class="thickbox">(?)</a></h3>
         <div id="stripCat" style="display:none;">

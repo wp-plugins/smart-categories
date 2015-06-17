@@ -28,6 +28,8 @@ By default the plugin will automatically check newly created posts when a page i
 
 == Changelog ==
 
+=1.0.2 =
+Tweaked admin page text.
 = 1.0.1 =
 Fixed bug - Admin screen not showing
 = 1.0 =
