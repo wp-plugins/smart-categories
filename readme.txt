@@ -15,6 +15,9 @@ From the plugin admin screen you can create rules by specifying a key word or ph
 WordPress category. Th plugin then scans post titles for the key, and adds the specified categories as appropriate.
 By default the plugin will automatically check newly created posts when a page is loaded, however this can be set to manual via a button in the admin screen.
 
+I can't guarantee any support, but if you use the support forum I will do my best to help you with any issues.
+Feel free to suggest improvements too.
+
 == Installation ==
 
 1. In the wordpress 'Plugins' menu, click 'Add New'.
@@ -28,7 +31,7 @@ By default the plugin will automatically check newly created posts when a page i
 
 == Changelog ==
 
-=1.0.2 =
+= 1.0.2 =
 Tweaked admin page text.
 = 1.0.1 =
 Fixed bug - Admin screen not showing
