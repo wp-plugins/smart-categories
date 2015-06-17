@@ -29,5 +29,7 @@ for new posts and apply the rules when a page is loaded, or manually via a butto
 
 == Changelog ==
 
+= 1.0.1 =
+Fixed bug - Admin screen not showing
 = 1.0 =
 Plugin Launched!

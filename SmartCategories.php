@@ -3,12 +3,12 @@
 Plugin Name: Smart Categories
 Description: Automatically sorts all / new posts into categories based on title content
 Author: Rob Pannell
-Version: 1.0
+Version: 1.0.1
 Author URI: http://robpannell.com/
 */
 
 function SmartCatAddPage() {
-	add_menu_page('Smart Categories', 'Smart Categories', 'edit_posts', 'smart-categories', 'acAdminPage','dashicons-category');
+	add_menu_page('Smart Categories', 'Smart Categories', 'edit_posts', 'smart-categories', 'SmartCatAdminPage','dashicons-category');
 }
 add_action('admin_menu', 'SmartCatAddPage');
 
