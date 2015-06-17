@@ -11,11 +11,9 @@ This simple plugin adds categories to posts based on key words or phrases in the
 
 == Description ==
 
-This simple plugin adds categories to posts based on key words or phrases in the title. 
-
-From the plugin admin screen you can create rules by specifying a word or phrase to match along with the existing 
-WordPress category you wish posts matching the rule to appear in. You may choose whether to automatically check 
-for new posts and apply the rules when a page is loaded, or manually via a button in the admin screen.
+From the plugin admin screen you can create rules by specifying a key word or phrase along with an existing 
+WordPress category. Th plugin then scans post titles for the key, and adds the specified categories as appropriate.
+By default the plugin will automatically check newly created posts when a page is loaded, however this can be set to manual via a button in the admin screen.
 
 == Installation ==
 
@@ -26,6 +24,7 @@ for new posts and apply the rules when a page is loaded, or manually via a butto
 
 == Screenshots ==
 
+1. The plugin admin screen
 
 == Changelog ==
 
