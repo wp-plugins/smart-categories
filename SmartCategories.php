@@ -279,7 +279,7 @@ function SmartCatFetchWPPosts($newerThan){
     else { return NULL; }
 }
 
-function SmartCatPageLoadUpdate(){ echo get_option('AutoCatLastSorted');
+function SmartCatPageLoadUpdate(){ 
         SmartCatCategorisePosts(get_option('AutoCatLastSorted'));
 }
 
