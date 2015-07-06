@@ -3,7 +3,7 @@
 Plugin Name: Smart Categories
 Description: Automatically sorts all / new posts into categories based on title content
 Author: Rob Pannell
-Version: 1.0.2
+Version: 1.0.3
 Author URI: http://robpannell.com/
 */
 
@@ -12,13 +12,13 @@ function SmartCatAddPage() {
 }
 add_action('admin_menu', 'SmartCatAddPage');
 
-add_option('AutoCatActive', 'true');
+add_option('AutoCatActive', 'active');
 add_option('AutoCatRuleIDs','1');
 add_option('AutoCatRule1Cat','1');
 add_option('AutoCatRule1Phrase','Example Rule');
 add_option('AutoCatLastSorted', '');
 
-if(get_option('AutoCatActive') == 'true'){ add_action( 'get_header', 'acPageLoadUpdate' ); }
+if(get_option('AutoCatActive') == 'active'){ add_action( 'get_header', 'SmartCatPageLoadUpdate' ); }
 
 function SmartCatAdminPage() {
     if(isset($_POST['updateRules'])){
@@ -34,7 +34,10 @@ function SmartCatAdminPage() {
     if(isset($_POST['stripCats'])){
         $message = SmartCatStripCategories();
     }
-    if(isset($_POST['autoSort'])){        update_option('AutoCatActive', $_POST['autoSort']); }
+    if(isset($_POST['autoSort'])){ 
+        update_option('AutoCatActive', $_POST['autoSort']); 
+        $message = 'Auto preference updated.';
+    }
     
     $acRules = SmartCatFetchRules();
     $newRuleID = SmartCatFindNextFreeRuleID($acRules);
@@ -53,7 +56,7 @@ function SmartCatAdminPage() {
 
 <div id="smartCats" class="wrap" style="max-width: 1000px;">
         <h2><span class="dashicons dashicons-category" style="font-size: 1.2em; margin-right: 10px;"></span> Smart Categories</h2>
-        <?php
+        <?php echo get_option('AutoCatActive');
         if($message) { ?>
             <div id="message" class="updated notice is-dismissible">
 		<p><strong><?php echo $message;?></strong></p>
@@ -76,11 +79,11 @@ function SmartCatAdminPage() {
         <form name="FilterRule" method="post" action="<?php echo $pageUrl;?>">
             <blockquote>
                 <p>
-                <input name="autoSort" type="radio" value="true" onclick="this.form.submit()"
-                       <?php if(get_option('AutoCatActive') == 'true') echo 'checked';?> />
+                <input name="autoSort" type="radio" value="active" onclick="this.form.submit()"
+                       <?php if(get_option('AutoCatActive') == 'active') echo ' checked';?> />
                 <label>Auto <a href="#TB_inline?width=400&height=100&inlineId=autoDef" class="thickbox">(?)</a> </label><br/>
-                <input name="autoSort" type="radio" value="false" onclick="this.form.submit()"
-                       <?php if(get_option('AutoCatActive') == 'false') echo 'checked';?> />
+                <input name="autoSort" type="radio" value="inactive" onclick="this.form.submit()"
+                       <?php if(get_option('AutoCatActive') == 'inactive') echo ' checked';?> />
                 <label>Manual <a href="#TB_inline?width=400&height=100&inlineId=manualDef" class="thickbox">(?)</a></label><br/>
                 </p>
             </blockquote>
@@ -276,7 +279,7 @@ function SmartCatFetchWPPosts($newerThan){
     else { return NULL; }
 }
 
-function SmartCatPageLoadUpdate(){
+function SmartCatPageLoadUpdate(){ echo get_option('AutoCatLastSorted');
         SmartCatCategorisePosts(get_option('AutoCatLastSorted'));
 }
 
